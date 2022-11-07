@@ -1,0 +1,88 @@
+configuration {
+	font:							      "Liga SFMono Nerd Font 11";
+  show-icons:             false;
+  drun-display-format:    "{name}";
+  disable-history:        false;
+  fullscreen:             false;
+	hide-scrollbar: 				true;
+	sidebar-mode: 					false;
+}
+
+window
+{
+    location: center;
+    font: "mono 10";
+    width: 35%;
+    border: 9px;
+    border-color: #1b1918;
+}
+
+mainbox
+{
+    background-color: #1b1918;
+    spacing: 8px;
+}
+
+inputbar
+{
+    spacing: 0;
+    background-color: #1b1918;
+}
+
+prompt
+{
+    padding: 2px 8px;
+    color: #000000;
+    background-color: #a1a16d;
+}
+
+entry
+{
+    padding: 2px 8px;
+    color: #dfdfdf;
+    background-color: #3d474e;
+}
+
+case-indicator
+{
+    enabled: false;
+}
+
+listview
+{
+    background-color: #1b1918;
+    spacing: 5px;
+    lines: 10;
+    cycle: false;
+}
+
+element
+{
+    padding: 5px;
+    background-color: #3d474e;
+}
+
+element.selected
+{
+    color: #000000;
+    background-color: #a1a16d;
+}
+
+element-text
+{
+    color: #c2c2c2;
+    background-color: #3d474e;
+    highlight: None;
+}
+
+element-text.selected
+{
+    color: #000000;
+    background-color: #a1a16d;
+}
+
+error-message, textbox
+{
+    color: #c2c2c2;
+    background-color: #3d474e;
+}
