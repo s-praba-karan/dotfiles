@@ -3,6 +3,10 @@
 # Wallpaper
 feh --bg-scale ~/Pictures/evening-sky.png &
 
+# Keyboard
+setxkbmap -layout dvorak 
+setxkbmap -option caps:backspace
+
 # Kill Applications
 pkill -f kdeconnectd
 pkill -f polybar
@@ -24,6 +28,3 @@ clipmenud &                               #Clipmenu Daemon
 /usr/bin/kdeconnect-indicator             #KDE Connect Applet
 flameshot &                               #Screenshot
 
-# Keyboard
-setxkbmap -layout dvorak &
-setxkbmap -option caps:backspace

@@ -50,5 +50,8 @@ alt + v
 shift + alt + b
   firefox
 
+shift + alt + l
+  {setxkbmap dvorak, setxkbmap us}
+
 control + alt + h 
   exec ~/.scripts/sxhkd-help

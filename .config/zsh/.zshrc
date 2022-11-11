@@ -18,6 +18,11 @@ HISTSIZE=5000               #How many lines of history to keep in memory
 HISTFILE=~/.config/zsh/.zsh_history     #Where to save history to disk
 SAVEHIST=5000               #Number of history entries to save to disk
 
+PATH=$PATH:$HOME/.scripts/lynx
+PATH=$PATH:$HOME/.scripts #making my scripts run without typing the whole path
+LYNX_CFG=$HOME/.config/lynx/lynx.cfg
+LYNX_LSS=$HOME/.config/lynx/lynx.lss
+
 # Prompt Settings
 PROMPT='%F{yellow}%1~%f %F{green}∯%f  '
 
@@ -55,7 +60,6 @@ alias ytt='ytfzf -t'
 alias yta='ytfzf -t -m'
 alias yth='ytfzf -H'
 alias ytc='ytfzf -x'
-alias ln='lightnovel-cli'
 
 # tmux
 alias 'tmux'='tmux -u'
@@ -80,7 +84,9 @@ alias 'nb'='newsboat'
 alias 'z'='zathura'
 alias 'open'='xdg-open'
 alias 'config'='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
-
+alias 'lynx'='~/.scripts/lynx/lynx'
+alias '?'='~/.scripts/duck'
+alias '??'='~/.scripts/google'
 # Plugins
 source ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
