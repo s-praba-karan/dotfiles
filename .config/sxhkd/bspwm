@@ -1,0 +1,204 @@
+###########
+#  SXHKD  #
+###########
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+
+
+###########
+#  BSPWM  #
+###########
+
+# quit/restart bspwm
+super + alt + {q,r} 
+  bspc {quit,wm -r}
+
+# fullscreen
+super + f 
+  bspc node -t '~fullscreen'
+
+# alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+# close and kill windows
+super + {_,shift + }q
+	bspc node -{c,k}
+
+
+#############
+# WORKSPACE #
+#############
+
+# Switch Active Workspaces
+alt + {Tab, shift + Tab}
+	bspc {desktop next.occupied -f, desktop prev.occupied -f}
+
+# Rotate layout by 90 degrees
+super + shift + r
+	bspc node @/ -R 90
+
+# Rotate tree
+super + shift + {d,a}
+  bspc node @/ -C {forward,backward}
+
+# move a floating window
+super + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# Expand/contract a window by moving one of its side outward/inward
+alt + shift + {h,j,k,l}
+  STEP=20; SELECTION={1,2,3,4}; \
+  bspc node -z $(echo "left -$STEP 0,bottom 0 $STEP,top 0 -$STEP,right $STEP 0" | cut -d',' -f$SELECTION) || \
+  bspc node -z $(echo "right -$STEP 0,top 0 $STEP,bottom 0 -$STEP,left $STEP 0" | cut -d',' -f$SELECTION)
+
+# swap the current node and the biggest node
+super + g
+	bspc node -s biggest
+
+# Toggle between floating and tiling
+super + u
+	bspc node focused.tiled -t floating || bspc node focused.floating -t tiled
+
+# Toggle between pseudo-tiling and tiling
+super + i
+	bspc node focused.tiled -t pseudo_tiled || bspc node -t tiled
+
+
+#----~ FOCUS ~----#
+
+# focus the node in the given direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9}
+	bspc {desktop -f,node -d} '^{1-9}'
+
+# focus the last node/desktop
+super + {Tab}
+	bspc {node} -f last
+
+# focus the next/previous node in the current desktop
+super + {_,shift + }n
+	bspc node -f {next,prev}.local.!hidden.window
+
+# focus the next/previous desktop in the current monitor
+super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+
+
+#----~ PRESELECT ~----#
+
+# preselect the direction
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# Move current window to a pre-selected space
+alt + shift + m
+    bspc node -n last.!automatic
+
+# cancel the preselection for the focused node
+super + ctrl + space
+	bspc node -p cancel
+
+
+###############
+# System Keys #
+###############
+
+#Volume Control
+XF86AudioLowerVolume
+	/usr/bin/pamixer -d 5
+XF86AudioRaiseVolume
+	/usr/bin/pamixer -i 5
+XF86AudioMute
+	/usr/bin/pamixer -t
+
+## Music Controls
+XF86AudioNext
+  playerctl next
+XF86AudioPrev
+  playerctl previous
+XF86AudioPlay
+  playerctl play-pause
+
+## Lock screen
+super + alt + l
+  exec ~/.scripts/lock.sh 
+
+################
+# APPLICATIONS #
+################
+
+# Reload Polybar
+super + shift + Escape
+	~/.config/polybar/launch.sh
+
+#Spawn Terminal of a certain geometry
+super + Return
+	alacritty
+	
+# Open Terminal in floating mode
+super + shift + Return
+  kitty
+
+# Rofi
+super + d
+  ~/.config/rofi/launcher.sh
+
+# Powermenu
+super + shift + p
+  ~/.scripts/powermenu.sh
+
+# Show clipmenu
+alt + v
+  CM_LAUNCHER=rofi clipmenu -no-show-icons -theme "~/.config/rofi/config.rasi"  -theme-str '* \{ font: 10px; \}' -theme-str 'window \{ width: 20em; \}' -no-show-icons
+
+# Firefox
+shift + alt + b
+  firefox
+
+shift + alt + f
+  krusader
+
+control + alt + h 
+  exec ~/.scripts/sxhkd-help
+
+############
+#SCRATCHPAD#
+############
+alt + b
+  ~/.scripts/tdrop_b -n 3 -p 'bspc rule -a kitty -o state=floating' kitty -e btop
+
+alt + w
+  ~/.scripts/bspwm-toggle-visibility whatsdesk --take-first
+
+alt + z
+  ~/.scripts/bspwm-toggle-visibility Zathura --take-first
+
+alt + k
+  tdrop -am -w 1362 -y 0 kitty
+
+alt + m 
+  ~/.scripts/tdrop_c -n 2 -p 'bspc rule -a kitty -o state=floating' kitty -e ncmpcpp
+
+super + alt + k
+  ~/.scripts/kb_layout.sh
+
+#######
+#MOUSE#
+#######
+
+button9
+  bsp-layout cycle --layouts tall,wide,tiled
+
+button8
+  bsp-layout cycle --layouts tiled,wide,tall
+ 

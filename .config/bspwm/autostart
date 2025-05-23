@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+# Wallpaper
+feh --bg-scale ~/Pictures/evening-sky.png &
+
+# Keyboard
+setxkbmap -v us -variant dvorak
+setxkbmap -option caps:backspace
+
+# Kill Applications
+pkill -f kdeconnectd
+pkill -f polybar
+pkill kdeconnect-indi
+pkill -f WhatsDesk
+pkill syncthing
+
+# Polybar
+~/.config/polybar/launch.sh &
+
+# Applications
+xsetroot -cursor_name left_ptr &
+sxhkd -m 1 -c ~/.config/sxhkd/bspwm &   #Hotkey Daemon
+picom &                                 #Compositor
+dunst &                                 #Notification Daemon
+pipewire &                              #Audio
+blueman-applet &                        #Bluetooth Manager Applet
+whatsdesk &                             #Whatsapp
+clipmenud &                             #Clipmenu Daemon
+/usr/bin/syncthing serve --no-browser & #Syncthing

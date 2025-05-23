@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# alias for drop down terminal
+tdrop -am -w 1362 -h 300 -y 0 "$@"
